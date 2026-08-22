@@ -4,10 +4,16 @@ cat > .gitignore << 'EOF'
 # ============================================
 data/raw/
 data/processed/
+data/dictionaries
+data/others
+/docs-ia
 *.zip
 *.rar
 *.7z
 
+# Temp files
+tmp_db_check.py
+__pycache__/
 # ============================================
 # Python
 # ============================================
