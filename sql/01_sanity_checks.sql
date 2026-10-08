@@ -135,3 +135,25 @@ SELECT
 FROM staging.identificacion
 WHERE fex_c IS NULL
    OR fex_c = 0;
+
+
+-- ============================================================================
+-- 5. COMPLETITUD DEL MÓDULO TIC
+-- El módulo debe conservar una fila por cada registro de identificación.
+-- El resultado esperado es 81.018 filas en ambas tablas y una diferencia de 0.
+-- ============================================================================
+
+SELECT
+	(SELECT COUNT(*) FROM staging.identificacion)
+		AS filas_identificacion,
+	(SELECT COUNT(*) FROM staging.tic)
+		AS filas_tic,
+	(SELECT COUNT(*) FROM staging.tic)
+		- (SELECT COUNT(*) FROM staging.identificacion)
+		AS diferencia_filas,
+	CASE
+		WHEN (SELECT COUNT(*) FROM staging.tic)
+		   = (SELECT COUNT(*) FROM staging.identificacion)
+		THEN 'OK: mismo número de filas'
+		ELSE 'REVISAR: diferencias en el número de filas'
+	END AS resultado;

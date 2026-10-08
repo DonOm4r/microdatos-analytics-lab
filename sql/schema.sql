@@ -504,3 +504,132 @@ CREATE INDEX idx_factores_exp_fexc       ON staging.factores_exp (fex_c);
 -- llave, el INSERT fallará aquí y no en staging (fail-fast en la bodega
 -- inmutable, donde debe detectarse).
 -- ============================================================================
+
+-- ============================================================================
+-- TIC — módulo diferenciador de Omar
+-- ============================================================================
+
+DROP TABLE IF EXISTS raw.tic CASCADE;
+CREATE TABLE raw.tic (
+    "DIRECTORIO" TEXT,
+    "SECUENCIA_P" TEXT,
+    "SECUENCIA_ENCUESTA" TEXT,
+    "P4001" TEXT,
+    "P1087" TEXT,
+    "P1088" TEXT,
+    "P977" TEXT,
+    "P976" TEXT,
+    "P978" TEXT,
+    "P979" TEXT,
+    "P994" TEXT,
+    "P2532" TEXT,
+    "P1559" TEXT,
+    "P2524" TEXT,
+    "P1093" TEXT,
+    "P2528" TEXT,
+    "P1095" TEXT,
+    "P980" TEXT,
+    "P1006_1" TEXT,
+    "P1006_2" TEXT,
+    "P1006_3" TEXT,
+    "P1006_4" TEXT,
+    "P1006_5" TEXT,
+    "P1006_6" TEXT,
+    "P1006_7" TEXT,
+    "P1006_8" TEXT,
+    "P1006_9" TEXT,
+    "P1006_10" TEXT,
+    "P1006_11" TEXT,
+    "P1006_12" TEXT,
+    "P1006_13" TEXT,
+    "CLASE_TE" TEXT,
+    "COD_DEPTO" TEXT,
+    "AREA" TEXT,
+    "F_EXP" TEXT,
+    CONSTRAINT pk_raw_tic
+        PRIMARY KEY ("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA")
+);
+
+DROP TABLE IF EXISTS staging.tic CASCADE;
+CREATE TABLE staging.tic (
+    directorio          INTEGER NOT NULL,
+    secuencia_p         INTEGER NOT NULL,
+    secuencia_encuesta  INTEGER NOT NULL,
+    p4001               INTEGER,
+    p1087               INTEGER,
+    p1088               INTEGER,
+    p977                INTEGER,
+    p976                INTEGER,
+    p978                INTEGER,
+    p979                INTEGER,
+    p994                INTEGER,
+    p2532               INTEGER,
+    p1559               INTEGER,
+    p2524               INTEGER,
+    p1093               INTEGER,
+    p2528               INTEGER,
+    p1095               INTEGER,
+    p980                INTEGER,
+    p1006_1             INTEGER,
+    p1006_2             INTEGER,
+    p1006_3             INTEGER,
+    p1006_4             INTEGER,
+    p1006_5             INTEGER,
+    p1006_6             INTEGER,
+    p1006_7             INTEGER,
+    p1006_8             INTEGER,
+    p1006_9             INTEGER,
+    p1006_10            INTEGER,
+    p1006_11            INTEGER,
+    p1006_12            INTEGER,
+    p1006_13            INTEGER,
+    clase_te            INTEGER,
+    cod_depto           VARCHAR(2),
+    area                VARCHAR(2),
+    f_exp               NUMERIC(20,10),
+    fex_c               NUMERIC(20,10),
+    CONSTRAINT pk_tic
+        PRIMARY KEY (directorio, secuencia_p, secuencia_encuesta)
+);
+
+COMMENT ON TABLE staging.tic IS 'Módulo de TIC: dispositivos, internet y usos digitales del micronegocio';
+COMMENT ON COLUMN staging.tic.directorio IS 'Directorio';
+COMMENT ON COLUMN staging.tic.secuencia_p IS 'Secuencia P';
+COMMENT ON COLUMN staging.tic.secuencia_encuesta IS 'Secuencia Encuesta';
+COMMENT ON COLUMN staging.tic.p4001 IS '¿Para su negocio o actividad utiliza alguno(a) de los siguientes dispositivos electrónicos?';
+COMMENT ON COLUMN staging.tic.p1087 IS '¿Cuántos computadores de escritorio tiene en uso el negocio o actividad?';
+COMMENT ON COLUMN staging.tic.p1088 IS '¿Cuántos computadores portátiles tiene en uso el negocio o actividad?';
+COMMENT ON COLUMN staging.tic.p977 IS '¿Cuántas tabletas tiene en uso el negocio o actividad?';
+COMMENT ON COLUMN staging.tic.p976 IS '¿Para su negocio o actividad utiliza el teléfono celular?';
+COMMENT ON COLUMN staging.tic.p978 IS '¿Cuántos teléfonos celulares inteligentes (Smartphone) tiene en uso el negocio o actividad?';
+COMMENT ON COLUMN staging.tic.p979 IS '¿Cuántos teléfonos celular convencional tiene en uso el negocio o actividad?';
+COMMENT ON COLUMN staging.tic.p994 IS '¿Cuál es la principal razón por la cual el negocio o actividad no tiene en uso computador, tableta o Smartphone?';
+COMMENT ON COLUMN staging.tic.p2532 IS '¿El negocio o actividad tiene página web o presencia en un sitio web?';
+COMMENT ON COLUMN staging.tic.p1559 IS '¿El negocio o actividad tiene presencia en redes sociales?';
+COMMENT ON COLUMN staging.tic.p2524 IS '¿Este negocio o actividad tiene acceso o utiliza el servicio de internet?';
+COMMENT ON COLUMN staging.tic.p1093 IS '¿Utiliza internet con conexión dentro del negocio o donde desarrolla su actividad?';
+COMMENT ON COLUMN staging.tic.p2528 IS '¿Qué tipo de conexión utiliza principalmente el negocio para acceder a internet?';
+COMMENT ON COLUMN staging.tic.p1095 IS '¿Cuál es la principal razón por la cual el negocio o actividad no utiliza internet?';
+COMMENT ON COLUMN staging.tic.p980 IS '¿Cuántas personas ocupadas utilizan internet para el desarrollo de sus actividades?';
+COMMENT ON COLUMN staging.tic.p1006_1 IS 'Búsqueda de información de dependencias oficiales y autoridades';
+COMMENT ON COLUMN staging.tic.p1006_2 IS 'Banca electrónica y otros servicios financieros';
+COMMENT ON COLUMN staging.tic.p1006_3 IS 'Transacciones con organismos gubernamentales';
+COMMENT ON COLUMN staging.tic.p1006_4 IS 'Servicio al cliente';
+COMMENT ON COLUMN staging.tic.p1006_5 IS 'Entrega de productos en forma digitalizada';
+COMMENT ON COLUMN staging.tic.p1006_6 IS 'Comprar a proveedores por internet mediante una plataforma electrónica';
+COMMENT ON COLUMN staging.tic.p1006_7 IS 'Vender productos a clientes por internet mediante una plataforma electrónica';
+COMMENT ON COLUMN staging.tic.p1006_8 IS 'Uso de aplicaciones';
+COMMENT ON COLUMN staging.tic.p1006_9 IS 'Enviar o recibir correo electrónico';
+COMMENT ON COLUMN staging.tic.p1006_10 IS 'Búsqueda de información sobre bienes y servicios';
+COMMENT ON COLUMN staging.tic.p1006_11 IS 'Llamadas telefónicas por internet o videoconferencias';
+COMMENT ON COLUMN staging.tic.p1006_12 IS 'Capacitación del personal';
+COMMENT ON COLUMN staging.tic.p1006_13 IS 'Mensajería instantánea o chat';
+COMMENT ON COLUMN staging.tic.clase_te IS 'Clase';
+COMMENT ON COLUMN staging.tic.cod_depto IS 'Departamento';
+COMMENT ON COLUMN staging.tic.area IS 'Ciudades principales y áreas metropolitanas';
+COMMENT ON COLUMN staging.tic.f_exp IS 'Factor de expansión';
+COMMENT ON COLUMN staging.tic.fex_c IS 'Factor de expansión departamental oficial 2023';
+
+CREATE INDEX idx_tic_depto ON staging.tic (cod_depto);
+CREATE INDEX idx_tic_area ON staging.tic (area);
+CREATE INDEX idx_tic_fexc ON staging.tic (fex_c);

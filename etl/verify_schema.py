@@ -41,14 +41,14 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# Módulos base del proyecto (costos_gastos_activos.csv queda fuera de alcance
-# por ahora; se agregará cuando se active el módulo diferenciador).
+# Módulos base del proyecto más el módulo diferenciador de Omar.
 MODULES = {
     "identificacion": "identificacion.csv",
     "caracteristicas": "caracteristicas.csv",
     "ubicacion": "sitio_ubicacion.csv",
     "ventas": "ventas_ingresos.csv",
     "factores_exp": "factores_expansion.csv",
+    "tic": "tic.csv",
 }
 
 
